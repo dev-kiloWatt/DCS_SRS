@@ -1318,9 +1318,8 @@ function SR.exportRadioMI24P(_data)
     _data.capabilities = { dcsPtt = true, dcsIFF = false, dcsRadioSwitch = false, intercomHotMic = false, desc = "" }
 
     _data.radios[1].name = "Intercom"
-    _data.radios[1].freq = 100.0
     _data.radios[1].modulation = 2 --Special intercom modulation
-    _data.radios[1].volume = 1.0
+    _data.radios[1].volume = SR.getRadioVolume(0, 457, { 0.0, 1.0 }, false)
     _data.radios[1].volMode = 0
 
     _data.radios[2].name = "R-863"
@@ -1328,28 +1327,31 @@ function SR.exportRadioMI24P(_data)
     _data.radios[2].modulation = SR.getRadioModulation(49)
     _data.radios[2].volume = SR.getRadioVolume(0, 511, { 0.0, 1.0 }, false)
     _data.radios[2].volMode = 0
+    _data.radios[2].channel = SR.getSelectorPosition(513, 0.05)
 
     local guard = SR.getSelectorPosition(507, 1)
     if guard == 1 and _data.radios[2].freq > 1000 then
         _data.radios[2].secFreq = 121.5 * 1000000
     end
 
-    _data.radios[3].name = "JADRO-1I"
-    _data.radios[3].freq = SR.getRadioFrequency(50, 500)
-    _data.radios[3].modulation = SR.getRadioModulation(50)
-    _data.radios[3].volume = SR.getRadioVolume(0, 426, { 0.0, 1.0 }, false)
+    _data.radios[3].name = "R-852"
+    _data.radios[3].freq = SR.getRadioFrequency(52)
+    _data.radios[3].modulation = SR.getRadioModulation(52)
+    _data.radios[3].volume = SR.getRadioVolume(0, 517, { 0.0, 1.0 }, false)
     _data.radios[3].volMode = 0
+    _data.radios[3].channel = SR.getSelectorPosition(518, 0.1)
 
     _data.radios[4].name = "R-828"
     _data.radios[4].freq = SR.getRadioFrequency(51)
     _data.radios[4].modulation = 1 --SR.getRadioModulation(50)
     _data.radios[4].volume = SR.getRadioVolume(0, 339, { 0.0, 1.0 }, false)
     _data.radios[4].volMode = 0
+    _data.radios[4].channel = SR.getSelectorPosition(337, 0.1)
 
-    _data.radios[5].name = "R-852"
-    _data.radios[5].freq = SR.getRadioFrequency(52)
-    _data.radios[5].modulation = SR.getRadioModulation(52)
-    _data.radios[5].volume = SR.getRadioVolume(0, 517, { 0.0, 1.0 }, false)
+    _data.radios[5].name = "JADRO-1I"
+    _data.radios[5].freq = SR.getRadioFrequency(50, 500)
+    _data.radios[5].modulation = SR.getRadioModulation(50)
+    _data.radios[5].volume = SR.getRadioVolume(0, 426, { 0.0, 1.0 }, false)
     _data.radios[5].volMode = 0
 
     _data.control = 0; -- HOTAS for now
